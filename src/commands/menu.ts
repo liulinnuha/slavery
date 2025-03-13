@@ -8,6 +8,7 @@ export default {
     description: "To display the menu by list, and see how to use the menu",
     maintenance: false,
     execute: async ({ client, msg, prefix, args }) => {
+        const { from } = msg;
         if (args.length > 1) {
             const name = args[0].toLowerCase();
             const cmd =
