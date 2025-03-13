@@ -1,0 +1,8 @@
+node_modules
+dist
+.env
+session.json
+tsconfig.json.bak
+.zed
+session
+pnpm-lock.yaml

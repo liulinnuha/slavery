@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "removeComments": true,
+        "moduleResolution": "Node",
+        "target": "ESNext",
+        "outDir": "dist",
+        "baseUrl": "./",
+        "experimentalDecorators": true,
+        "paths": {
+            "@utils/*": ["src/utils/*"],
+            "@constants": ["src/constants/index.ts"],
+            "@handlers/*": ["src/handlers/*"]
+        }
+    }
+}
