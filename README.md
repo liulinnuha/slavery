@@ -96,4 +96,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-Project Link: [https://github.com/liulinnuha/slavery](https://github.com/liulinnuha/slavery)
+Project Link: [https://github.com/liulinnuha/slavery](https://github.com/liulinnuha/slavery).
