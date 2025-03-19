@@ -1,4 +1,3 @@
-```markdown
 # Slavery WhatsApp Bot
 
 A powerful WhatsApp bot built with TypeScript that includes various features like downloader, fun commands, group management, and more.
@@ -98,4 +97,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Contact
 
 Project Link: [https://github.com/liulinnuha/slavery](https://github.com/liulinnuha/slavery)
-```
