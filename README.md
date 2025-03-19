@@ -26,8 +26,8 @@ A powerful WhatsApp bot built with TypeScript that includes various features lik
 
 1. Clone the repository
 ```bash
-git clone https://github.com/yourusername/slavery-ts.git
-cd slavery-ts
+git clone https://github.com/yourusername/slavery.git
+cd slavery
 ```
 
 2. Install dependencies
