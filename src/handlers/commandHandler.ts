@@ -16,6 +16,7 @@ import {
 } from "@whiskeysockets/baileys";
 import colors from "colors";
 import path from "path";
+import { GlobSync } from "glob";
 
 const textMessage = JSON.parse(fs.readFileSync("./message.json", "utf-8"));
 export class CommandHandler {
@@ -94,27 +95,10 @@ export class CommandHandler {
                 return msg.reply(shortMessage.privateOnly);
             if (getCommand?.isAdminBot && !isSenderAdmin)
                 return msg.reply(shortMessage.adminOnly);
-            // if (getCommand?.ownerOnly && !User.owner)
-            //     return msg.reply(shortMessage.devOnly);
             if (getCommand?.maintenance)
                 return msg.reply(shortMessage.maintenance);
             if (getCommand?.isBotAdmin && !isBotAdmin)
                 return msg.reply(shortMessage.group.botNoAdmin);
-            // if (getCommand?.nsfw) {
-            //     if (isGroup && Group.safe)
-            //         return msg.reply(shortMessage.group.antinsfw);
-            //     if (!User.age) {
-            //         return msg.reply(shortMessage.register.setAge);
-            //     } else if (User.age < 16) {
-            //         return msg.reply(shortMessage.nsfw);
-            //     }
-            // }
-            // if (
-            //     getCommand?.consume &&
-            //     User.limit > User.limitRequest &&
-            //     !User.owner
-            // )
-            //     return msg.reply(shortMessage.needlimit);
 
             const command_log = [
                 colors.cyan(`[ ${msg.isGroup ? " GROUP " : "PRIVATE"} ]`),
@@ -155,10 +139,10 @@ export class CommandHandler {
                         cdStartMessage,
                     );
 
-            console.log(colors.bgCyan("command log"), ...command_log);
-            if (getCommand?.callback)
+            console.log(colors.bold("[COMMAND LOG]"), ...command_log);
+            if (getCommand?.execute)
                 await getCommand
-                    .callback({
+                    .execute({
                         client,
                         message,
                         msg,
@@ -169,18 +153,7 @@ export class CommandHandler {
                         // User,
                         // Group,
                     })
-                    .then
-                    // async () =>
-                    //     await expUpdate({
-                    //         msg,
-                    //         toAdd: {
-                    //             exp: +5,
-                    //             limit: +(getCommand.consume || 0),
-                    //             totalRequest: +1,
-                    //             dayRequest: +1,
-                    //         },
-                    //     }).catch((e) => console.log(e)),
-                    ()
+                    .then()
                     .catch((error: unknown) => {
                         if (error instanceof MessageError)
                             log.error("from", senderNumber);
@@ -227,12 +200,23 @@ export class CommandHandler {
         }
     }
 
-    getAllFiles(dir: string) {
-        return fs.readdirSync(dir).map((file) => {
-            return {
-                basename: path.basename(file, path.extname(file)),
-                file: path.join(dir, file),
-            };
-        });
+    getAllFiles(directory: string) {
+        let pathFiles = new GlobSync(path.join(directory, "*.ts")).found;
+        pathFiles.push(
+            ...new GlobSync(path.join(directory, "*", "*.ts")).found,
+        );
+        pathFiles.push(
+            ...new GlobSync(path.join(directory, "*", "*", "*.ts")).found,
+        );
+        pathFiles = pathFiles.filter((v) => v.endsWith(".ts"));
+        const files = [] as { basename: string; file: string }[];
+        for (let file of pathFiles) {
+            const basename = path.basename(file, ".ts").toLowerCase();
+            files.push({
+                basename,
+                file,
+            });
+        }
+        return files;
     }
 }

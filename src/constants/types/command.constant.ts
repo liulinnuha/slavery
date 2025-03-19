@@ -1,11 +1,5 @@
 import { WAMessage, WASocket } from "@whiskeysockets/baileys";
-import {
-    IGroupModel,
-    IUserModel,
-    Collection,
-    IMessage,
-    MessageSerialize,
-} from "@constants";
+import { Collection, IMessage, MessageSerialize } from "@constants";
 
 export const commands = new Collection<String, ICommand>(); // new Map<String, ICommand>()
 export const cooldown = new Collection<string, number>(); // new Map<String, number>
@@ -13,6 +7,12 @@ export const startMessage = new Collection<string, number>(); // new Map<String,
 
 // Read the JSDOC docs : https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html
 export interface ICommand {
+    /**
+     * @type {string}
+     * @description Name of the command
+     * @example name: "help"
+     */
+    name: string;
     /**
      * @type {string[]}
      * @description To create a command alias
@@ -85,13 +85,6 @@ export interface ICommand {
 
     /**
      * @type {boolean}
-     * @description Making commands in nsfw mode (>16 only)
-     * @example nsfw: true // (true/false)
-     */
-    nsfw?: boolean;
-
-    /**
-     * @type {boolean}
      * @description Create a group admin who can use the command
      * @example adminGroup: true // (true/false)
      */
@@ -114,9 +107,9 @@ export interface ICommand {
     /**
      * @type {string}
      * @description To write how to use
-     * @example use: ">listhelp asupan"
+     * @example usage: "!info"
      */
-    use?: string;
+    usage?: string;
 
     /**
      * @type {CommandObject}
@@ -135,7 +128,5 @@ export interface CommandObject {
     prefix: string;
     args: string[];
     msg: MessageSerialize;
-    User: IUserModel;
-    Group: IGroupModel;
     shortMessage: IMessage;
 }
