@@ -3,9 +3,11 @@ import makeWASocket, { useMultiFileAuthState } from "@whiskeysockets/baileys";
 import dotenv from "dotenv";
 import pino from "pino";
 import { handleConnection } from "./handlers/connectionHandler";
-import { SESSION_FILE } from "./config/env";
+import { SESSION_FILE, MONGODB_URI } from "./config/env";
+import { connectDB } from "@utils/mongodb";
 
 dotenv.config();
+connectDB(MONGODB_URI);
 
 async function startBot() {
     const { state, saveCreds } = await useMultiFileAuthState(SESSION_FILE);
@@ -17,10 +19,6 @@ async function startBot() {
     handleConnection(sock, startBot);
 
     sock.ev.on("creds.update", saveCreds);
-
-    // sock.ev.on("messages.upsert", (msg) => {
-    //     console.log("Received a new message:", msg);
-    // });
 }
 
 startBot();
