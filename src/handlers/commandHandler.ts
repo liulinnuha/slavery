@@ -128,10 +128,7 @@ export class CommandHandler {
                     });
                 }
             }
-            // if (!User.admin && !User.owner && !User.premium) {
-            //     cooldown.set(msg.from, now);
-            //     setTimeout(() => cooldown.delete(msg.from), cdAmount);
-            // }
+
             if (!msg.isGroup)
                 startMessage.set(String(from), now),
                     setTimeout(
@@ -150,8 +147,6 @@ export class CommandHandler {
                         prefix,
                         args,
                         shortMessage,
-                        // User,
-                        // Group,
                     })
                     .then()
                     .catch((error: unknown) => {
@@ -178,7 +173,6 @@ export class CommandHandler {
         );
         for (const { basename, file } of commandFiles) {
             if (commands.get(basename)) {
-                // console.log(chalk.whiteBright('├'), chalk.keyword('red')('[  ERROR  ]'), `File with filename ${basename} already register, try to change filename.`)
             } else if (typeof require(file).default !== "object") {
                 log.error(
                     `Type of file ${basename} is ${typeof require(file).default}, required object.`,

@@ -1,12 +1,5 @@
-import { formatFileSize } from "@utils/helpers";
+import { formatFileSize, validateYoutubeUrl } from "@utils/helpers";
 import youtubeDl, { Payload } from "youtube-dl-exec";
-import fs from "fs";
-
-export const validateYoutubeUrl = (url: string): boolean => {
-    const youtubeRegex =
-        /^(https?:\/\/)?(www\.)?(youtube\.com\/(watch\?v=|shorts\/|embed\/)|youtu\.be\/)([\w-]{11})/;
-    return youtubeRegex.test(url);
-};
 
 export const parseYoutubeUrl = (url: string) => {
     if (!validateYoutubeUrl(url)) {
@@ -70,8 +63,6 @@ export const youtube = async (url: string, type: "mp3" | "mp4") => {
                     ? f.format_note === "medium" && f.ext === "webm"
                     : f.ext === "mp4" && f.protocol != "m3u8_native"),
         );
-
-        // fs.writeFileSync(`./${id}.json`, JSON.stringify(result.formats));
 
         return {
             title: result.title,

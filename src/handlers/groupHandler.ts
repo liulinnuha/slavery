@@ -4,7 +4,7 @@ import colors from "colors";
 
 /**
  * @param {import("@adiwajshing/baileys/src").AnyWAclientet} client
- * @description copied from https://github.com/FaizBastomi/wbot/blob/multi-device/event/group_event.js
+ * @description enhancement from https://github.com/FaizBastomi/wbot/blob/multi-device/event/group_event.js
  */
 
 export class GroupHandler {
