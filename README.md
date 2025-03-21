@@ -7,6 +7,7 @@ A powerful WhatsApp bot built with TypeScript that includes various features lik
 ### 📥 Downloader
 - **TikTok** - Download TikTok videos
 - **YouTube** - Download YouTube videos (MP3/MP4)
+- **Facebook** - Download Facebook videos
 
 ### 🎮 Fun Commands
 - **Fake User** - Generate random fake user profiles

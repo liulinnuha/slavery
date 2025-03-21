@@ -25,3 +25,35 @@ export const formatFileSize = (sizeInBytes: number): string => {
 
     return `${size.toFixed(2)} ${units[i]}`;
 };
+
+export const validateYoutubeUrl = (url: string): boolean => {
+    const youtubeRegex =
+        /^(https?:\/\/)?(www\.)?(youtube\.com\/(watch\?v=|shorts\/|embed\/)|youtu\.be\/)([\w-]{11})/;
+    return youtubeRegex.test(url);
+};
+
+export const validateFacebookUrl = (url: string): boolean => {
+    const fbRegex =
+        /^(https?:\/\/)?(www\.|web\.)?(facebook\.com|fb\.watch)\/(watch\?v=\d+|reel\/\w+|story\.php\?story_fbid=\d+|photo\.php\?fbid=\d+|groups\/\d+\/permalink\/\d+|share\/v\/[\w-]+)/;
+    return fbRegex.test(url);
+};
+
+export const validateInstagramUrl = (
+    url: string,
+): { isValid: boolean; type?: "video" | "reels" | "story" | "image" } => {
+    const igRegex =
+        /^(https?:\/\/)?(www\.)?instagram\.com\/(reel|p|stories|tv|post)\/[\w-]+/;
+    if (!igRegex.test(url)) return { isValid: false };
+
+    let type: "video" | "reels" | "story" | "image" = "image";
+    if (url.includes("/reel/")) type = "reels";
+    else if (
+        url.includes("/p/") ||
+        url.includes("/tv/") ||
+        url.includes("/post/")
+    )
+        type = "video";
+    else if (url.includes("/stories/")) type = "story";
+
+    return { isValid: true, type };
+};

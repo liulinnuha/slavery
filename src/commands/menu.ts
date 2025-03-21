@@ -48,36 +48,18 @@ export default {
         let t = `*Here My Command List*\n\n`;
         const keys = Object.keys(category);
 
-        // let sections = [];
-
         for (const key of keys) {
-            let d = category[key].map((cmd) => cmd.name);
-            // let e = [];
-            // for (let i = 0; i < d.length; i++) {
-            //     let __cmd = commands.get(d[i]);
-            //     e.push({
-            //         title: d[i],
-            //         rowId: prefix + `lmenu ` + d[i],
-            //         description: __cmd.description || null,
-            //     });
-            // }
-            t += `*${key.toUpperCase()}*\`\`\`\n-> ${category[key].map((cmd) => cmd.name + " | " + cmd.description).join("\n-> ")}\`\`\`\n\n`;
-            // sections.push({
-            //     title: `${key.toUpperCase()}`,
-            //     rows: e,
-            // });
+            let data = category[key]
+                .map((cmd) => cmd.name + " | " + cmd.description)
+                .join("\n-> ");
+            t += `*${key.toUpperCase()}*\`\`\`\n-> ${data}\`\`\`\n\n`;
         }
         str.push(t);
 
-        // await client.sendMessage(from, { text: t })
         return client.sendMessage(from, {
             text:
                 str.join("\n") +
                 `\n\n\`\`\`how to use: ${prefix}<command> | ex: ${prefix}joke\`\`\``,
-            // footer,
-            // title: `AllenBOT menu list`,
-            // buttonText: 'LIST MENU',
-            // sections,
         });
     },
 } as ICommand;
