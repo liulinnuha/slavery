@@ -1,13 +1,14 @@
 import { ICommand } from "@constants";
 import { facebook } from "@libs/facebook";
+import { PREFIX } from "src/config/env";
 import { validateFacebookUrl } from "@utils/helpers";
 
 export default {
-    name: "fbvid",
+    name: "fb",
     aliases: ["fbv", "fb", "fbvid"],
     category: "Downloader",
     description: "Download Facebook video",
-    usage: "fbvid <url>",
+    usage: `${PREFIX}fb <url>`,
     consume: 1,
     execute: async ({ msg, args, client, shortMessage }) => {
         if (args.length === 0) {

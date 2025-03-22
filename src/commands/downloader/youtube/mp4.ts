@@ -1,12 +1,14 @@
 import { ICommand } from "@constants";
-import { parseYoutubeUrl, youtube } from "@libs/youtube";
+import { youtube } from "@libs/youtube";
+import { parseYoutubeUrl } from "@utils/helpers";
+import { PREFIX } from "src/config/env";
 
 export default {
     name: "ytmp4",
     aliases: ["ytmp4", "yt4"],
     category: "Downloader",
     description: "Download YouTube video in MP4 format",
-    usage: "ytmp4 <video_url>",
+    usage: `${PREFIX}ytmp4 <video_url>`,
     consume: 1,
     execute: async ({ msg, args, client, shortMessage }) => {
         if (args.length === 0) {
@@ -22,7 +24,7 @@ export default {
             image: { url: result.thumbnail },
             caption: `Title: ${result.title} \nSize: ${result.size}\n\`\`\`Downloading Video, Please Wait...\`\`\``,
         });
-        console.log("link", result.link);
+
         await client.sendMessage(msg.from, {
             video: { url: result.link },
             mimetype: "video/mp4",

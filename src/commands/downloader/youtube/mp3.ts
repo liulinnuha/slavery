@@ -1,12 +1,14 @@
 import { ICommand } from "@constants";
-import { parseYoutubeUrl, youtube } from "@libs/youtube";
+import { youtube } from "@libs/youtube";
+import { parseYoutubeUrl } from "@utils/helpers";
+import { PREFIX } from "src/config/env";
 
 export default {
     name: "ytmp3",
     aliases: ["ytmp3", "yt3"],
     category: "Downloader",
     description: "Download YouTube video in MP3 format",
-    usage: "ytmp3 <video_url>",
+    usage: `${PREFIX}ytmp3 <video_url>`,
     consume: 1,
     execute: async ({ msg, args, client, shortMessage }) => {
         if (args.length === 0) {

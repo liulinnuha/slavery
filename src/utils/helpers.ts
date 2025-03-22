@@ -32,6 +32,48 @@ export const validateYoutubeUrl = (url: string): boolean => {
     return youtubeRegex.test(url);
 };
 
+export const parseYoutubeUrl = (url: string) => {
+    if (!validateYoutubeUrl(url)) {
+        return {
+            valid: false,
+            error: "Invalid YouTube URL",
+            type: null,
+            videoId: null,
+            url: url,
+        };
+    }
+
+    const urlObj = new URL(url);
+    let videoId: string | null = null;
+    let type: "short" | "video" | null = null;
+
+    if (urlObj.hostname === "youtu.be") {
+        videoId = urlObj.pathname.substring(1);
+        type = "video";
+    } else if (urlObj.pathname.startsWith("/watch")) {
+        videoId = urlObj.searchParams.get("v");
+        type = "video";
+    } else if (urlObj.pathname.startsWith("/shorts/")) {
+        videoId = urlObj.pathname.split("/")[2];
+        type = "short";
+    } else if (urlObj.pathname.startsWith("/embed/")) {
+        videoId = urlObj.pathname.split("/")[2];
+        type = "video";
+    }
+
+    if (!videoId) {
+        return {
+            valid: false,
+            error: "Could not extract video ID",
+            type: null,
+            videoId: null,
+            url: url,
+        };
+    }
+
+    return { valid: true, type, videoId, url };
+};
+
 export const validateFacebookUrl = (url: string): boolean => {
     const fbRegex =
         /^(https?:\/\/)?(www\.|web\.)?(facebook\.com|fb\.watch)\/(watch\?v=\d+|reel\/\w+|story\.php\?story_fbid=\d+|photo\.php\?fbid=\d+|groups\/\d+\/permalink\/\d+|share\/v\/[\w-]+)/;
@@ -47,12 +89,8 @@ export const validateInstagramUrl = (
 
     let type: "video" | "reels" | "story" | "image" = "image";
     if (url.includes("/reel/")) type = "reels";
-    else if (
-        url.includes("/p/") ||
-        url.includes("/tv/") ||
-        url.includes("/post/")
-    )
-        type = "video";
+    else if (url.includes("/p/")) type = "image";
+    else if (url.includes("/tv/") || url.includes("/post/")) type = "video";
     else if (url.includes("/stories/")) type = "story";
 
     return { isValid: true, type };
