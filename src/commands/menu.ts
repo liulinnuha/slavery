@@ -44,8 +44,8 @@ export default {
                 category[info.category].push(info);
             }
         }
-        let str = [`┌──「 ${BOTNAME} 」──⬣`];
-        let t = `*Here My Command List*\n\n`;
+        let str = [`===<[${BOTNAME}]>===`];
+        let t = `*Available Commands*\n\n`;
         const keys = Object.keys(category);
 
         for (const key of keys) {

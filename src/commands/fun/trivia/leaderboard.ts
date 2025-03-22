@@ -4,7 +4,7 @@ import { getLeaderboard } from "@schema/trivia/leaderboardSchema";
 export default {
     name: "leaderboard",
     aliases: ["lb", "leaderboard"],
-    description: "Menampilkan leaderboard kuis",
+    description: "Show the leaderboard of trivia scores",
     category: "fun",
     execute: async ({ msg, client, args }) => {
         const { from, isGroup } = msg;

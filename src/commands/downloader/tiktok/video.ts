@@ -5,7 +5,7 @@ import FormData from "form-data";
 export default {
     name: "tiktok",
     aliases: ["tt"],
-    description: "Download video dari TikTok",
+    description: "Download video from TikTok",
     category: "Downloader",
     execute: async ({ msg, client, args, message }) => {
         const { from } = msg;
