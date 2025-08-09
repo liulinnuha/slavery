@@ -1,4 +1,3 @@
-```
 MIT License
 
 Copyright (c) 2024 Slavery WhatsApp Bot
@@ -20,20 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-```
-
-The MIT License is one of the most popular open-source licenses because it:
-1. Is simple and permissive
-2. Allows others to use your code freely
-3. Provides liability protection for the author
-4. Is compatible with many other licenses
-5. Is widely understood and accepted in the open-source community
-
-You can modify the copyright year and holder name as needed. This license allows others to:
-- Use your code commercially
-- Modify your code
-- Distribute your code
-- Use it privately
-- Sublicense your code
-
-The only requirement is that they include the original license and copyright notice in any copy of the software/code.
